@@ -40,27 +40,21 @@ MicroLinks converts long URLs into short, shareable links and tracks the number 
 - Render — Backend
 - MongoDB Atlas — Database
 
-## Project Structure
+## Architecture
 
-```text
-MicroLinks/
-│
-├── config/
-│   └── db.js
-│
-├── models/
-│   └── Url.js
-│
-├── routes/
-│   └── urlRoutes.js
-│
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   └── package.json
-│
-├── .env
-├── .gitignore
-├── server.js
-├── package.json
-└── README.md
+```mermaid
+flowchart LR
+
+    User[User / Browser]
+
+    Frontend[React Frontend<br/>Vite + Tailwind]
+
+    API[Express REST API<br/>Node.js]
+
+    DB[(MongoDB Atlas)]
+
+    User --> Frontend
+    Frontend -->|HTTP Requests| API
+    API -->|Mongoose| DB
+    DB --> API
+    API --> Frontend
